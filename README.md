@@ -57,6 +57,22 @@ const factorial = recursive((N) => {
 });
 ```
 
+The function `recurse` also takes an optional 2nd parameter and binds that object to
+the recursive function's `this` object. Extending the `N` factorial example again:
+
+```javascript
+const { call, callWithContext } = require('tallstack');
+
+const obj = { multiply: (x, y) => (x * y) };
+
+function factorialWithThis(N) {
+    if (N === 0) return 1;
+    return call(this.multiply, N, call(factorial, N - 1));
+}
+
+const factorial = recursive(factorialWithThis, obj);
+```
+
 ## How does it work?
 
 The library works by implementing the callstack in JavaScript and then evaluating
