@@ -25,7 +25,7 @@ const multiply = (x, y) => (x * y);
 
 const factorial = recursive((N) => {
     if (N === 0) return 1;
-    return call(multiply, n, call(factorial, n - 1));
+    return call(multiply, N, call(factorial, N - 1));
 });
 ```
 
@@ -53,7 +53,7 @@ function multiply(x, y) {
 
 const factorial = recursive((N) => {
     if (N === 0) return 1;
-    return callWithContext(object, multiply, n, call(factorial, n - 1));
+    return callWithContext(object, multiply, N, call(factorial, N - 1));
 });
 ```
 
