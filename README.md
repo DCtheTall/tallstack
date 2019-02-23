@@ -3,6 +3,8 @@
 A small libarary which allows you to defined tail recursive functions
 in JavaScript that will not cause stack overflow.
 
+It is published for download on [npm](https://www.npmjs.com/package/tallstack).
+
 ## Contents
 
 1. [How do I use it?](#how-do-i-use-it?)
