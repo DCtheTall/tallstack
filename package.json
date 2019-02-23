@@ -6,6 +6,10 @@
   "scripts": {
     "test": "jest test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DCtheTall/tallstack.git"
+  },
   "keywords": [
     "recursion",
     "call",
@@ -15,6 +19,10 @@
   ],
   "author": "Dylan Cutler (DCtheTall)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DCtheTall/tallstack/issues"
+  },
+  "homepage": "https://github.com/DCtheTall/tallstack#readme",
   "devDependencies": {
     "jest": "^24.1.0"
   }
