@@ -1,0 +1,6 @@
+.gitignore
+CONTRIBUTING.md
+test.js
+node_modules/
+.vscode
+*.DS_Store

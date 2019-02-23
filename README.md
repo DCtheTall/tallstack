@@ -67,7 +67,7 @@ recursions that are thousands or possibly millions of calls deep.
 So far there are two big drawbacks on the library, and I am going to be actively looking
 for ways to improve the library (PRs are welcome, see [Contributing](#contributing)).
 
-1. You cannot set local variables with call:
+### 1. You cannot set local variables with call:
 
 For example you could not do this:
 
@@ -92,7 +92,7 @@ const factorial = recursive((N) => {
 usually the `let` keyword in functional languages is syntactic sugar for this type
 of evaluation strategy.
 
-2. Performance:
+### 2. Performance:
 
 So far this library does not evaluate functions as quickly as native JavaScript recursion.
 To some extent this is to be expected, due to the added complexity added to just normal function
