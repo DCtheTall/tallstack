@@ -1,0 +1,21 @@
+{
+  "name": "tallstack",
+  "version": "0.0.0",
+  "description": "A library that allows you to define recursive functions in JavaScript without stack overflow.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test.js"
+  },
+  "keywords": [
+    "recursion",
+    "call",
+    "stack",
+    "functions",
+    "functional-programming"
+  ],
+  "author": "Dylan Cutler (DCtheTall)",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
+}
