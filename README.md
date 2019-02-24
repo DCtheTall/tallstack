@@ -126,8 +126,8 @@ warranty for personal or recreational use. You can read more by looking at LICEN
 ## Contributing
 
 I every intention of keeping this software open source and free for use. If someone can use this
-to do what this library does better, then that's great. If people want to help make this library
-better, that's also great!
+code to make a different library that does what my library does better then that would be great.
+If people want to help make this library better, that's also great!
 
 PRs are welcome but must be reviewed by me. Any changes to the code must pass existing tests and
 any additional functionality should also be tested as well. PRs with new test cases are also
