@@ -60,3 +60,16 @@ test('Computing the 15th fibonacci term', () => {
     const got = fib(15);
     expect(377).toBe(got);
 });
+
+test('Recursing with functions that call one another', () => {
+    const isEven = recursive((n) =>
+        (n === 0 ? true : call(isOdd, n - 1)));
+    const isOdd = recursive((n) =>
+        (n === 0 ? false : call(isEven, n - 1)));
+
+    let got = isEven(5e5);
+    expect(true).toBe(got);
+
+    got = isOdd(5e5 + 1);
+    expect(true).toBe(got);
+});
