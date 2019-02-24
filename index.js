@@ -80,10 +80,21 @@ class StackFrame {
     }
 }
 
+/**
+ * @param {(...args: any[]) => any} func
+ * @param {any[]} args
+ * @return {StackFrame}
+ */
 function call(func, ...args) {
     return new StackFrame(func, args);
 }
 
+/**
+ * @param {any} thisArg
+ * @param {(...args: any[]) => any} func
+ * @param {any[]} args
+ * @return {StackFrame}
+ */
 function callWithContext(thisArg, func, ...args) {
     return StackFrame.withContext(thisArg, func, args);
 }
@@ -128,6 +139,11 @@ class CallStack {
     }
 }
 
+/**
+ * @param {(...args: any[]) => any} func
+ * @param {any} thisArg
+ * @param {(...args: any[]) => any} func
+ */
 function recursive(func, thisArg) {
     const name = func.name || 'recurse';
     const obj = {
