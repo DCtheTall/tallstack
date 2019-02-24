@@ -1,6 +1,6 @@
 # tallstack
 
-A small libarary which allows you to defined tail recursive functions
+A small libarary which allows you to define tail recursive functions
 in JavaScript that will not cause stack overflow.
 
 It is published for download on [npm](https://www.npmjs.com/package/tallstack).

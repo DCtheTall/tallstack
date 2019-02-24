@@ -37,10 +37,6 @@ class StackFrame {
         }
     }
 
-    static withContext(thisArg, func, args) {
-        return new StackFrame(func, args).setContext(thisArg);
-    }
-
     setContext(thisArg) {
         this.context = thisArg;
         return this;
@@ -96,7 +92,7 @@ function call(func, ...args) {
  * @return {StackFrame}
  */
 function callWithContext(thisArg, func, ...args) {
-    return StackFrame.withContext(thisArg, func, args);
+    return new StackFrame(func, args).setContext(thisArg);
 }
 
 class CallStack {
