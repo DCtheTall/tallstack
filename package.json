@@ -1,6 +1,6 @@
 {
   "name": "tallstack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library that allows you to define recursive functions in JavaScript without stack overflow.",
   "main": "index.js",
   "scripts": {
