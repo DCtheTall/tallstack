@@ -146,17 +146,17 @@ class CallStack {
  */
 function recursive(func, thisArg) {
     const name = func.name || 'recurse';
-    const obj = {
-        [name]: function() {
-            const firstEval = func.apply(thisArg, Array.from(arguments));
+    const recursiveFunc = {
+        [name]: (...args) => {
+            const firstEval = func.apply(thisArg, args);
             if (!(firstEval instanceof StackFrame)) {
                 return firstEval;
             }
             return new CallStack(firstEval).evaluate();
-        }
-    }
-    originalFunctionMap.set(obj[name], func);
-    return obj[name];
+        },
+    }[name];
+    originalFunctionMap.set(recursiveFunc, func);
+    return recursiveFunc;
 }
 
 module.exports = {
