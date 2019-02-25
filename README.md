@@ -1,14 +1,14 @@
 # tallstack
 
-A small libarary which allows you to define tail recursive functions
+A small library which allows you to define tail recursive functions
 in JavaScript that will not cause stack overflow.
 
 It is published for download on [npm](https://www.npmjs.com/package/tallstack).
 
 ## Contents
 
-1. [How do I use it?](#how-do-i-use-it?)
-2. [How does it work?](#how-does-it-work?)
+1. [How do I use it?](#how-do-i-use-it)
+2. [How does it work?](#how-does-it-work)
 3. [What are the drawbacks?](#what-are-the-drawbacks)
 4. [License](#license)
 5. [Contributing](#contributing)
@@ -16,7 +16,7 @@ It is published for download on [npm](https://www.npmjs.com/package/tallstack).
 ## How do I use it?
 
 The library only exports 3 functions, `call`, `callWithContext`, and `recursive`.
-Let's look at an example function which computes the `N`th factorial number:
+Let's look at an example function which computes the `N` factorial:
 
 ```javascript
 const { recursive, call } = require('tallstack');
@@ -61,7 +61,7 @@ The function `recurse` also takes an optional 2nd parameter and binds that objec
 the recursive function's `this` object. Extending the `N` factorial example again:
 
 ```javascript
-const { call, callWithContext } = require('tallstack');
+const { recursive, call, callWithContext } = require('tallstack');
 
 const obj = { multiply: (x, y) => (x * y) };
 
@@ -113,7 +113,7 @@ of evaluation strategy.
 ### 2. Performance:
 
 So far this library does not evaluate functions as quickly as native JavaScript recursion.
-To some extent this is to be expected, due to the added complexity added to just normal function
+To some extent this is to be expected, due to the added complexity on top of normal function
 evaluation. Right now the performance seems to degrade as your recursion tree gets wider (i.e. each
 call has many recursive calls). I have done some work to speed it up but it is not quite as fast as
 it can get to native, but I am sure there is more that can be done and PRs are welcome.
