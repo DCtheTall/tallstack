@@ -7,8 +7,8 @@ It is published for download on [npm](https://www.npmjs.com/package/tallstack).
 
 ## Contents
 
-1. [How do I use it?](#how-do-i-use-it?)
-2. [How does it work?](#how-does-it-work?)
+1. [How do I use it?](#how-do-i-use-it)
+2. [How does it work?](#how-does-it-work)
 3. [What are the drawbacks?](#what-are-the-drawbacks)
 4. [License](#license)
 5. [Contributing](#contributing)
