@@ -61,7 +61,7 @@ The function `recurse` also takes an optional 2nd parameter and binds that objec
 the recursive function's `this` object. Extending the `N` factorial example again:
 
 ```javascript
-const { call, callWithContext } = require('tallstack');
+const { recursive, call, callWithContext } = require('tallstack');
 
 const obj = { multiply: (x, y) => (x * y) };
 
