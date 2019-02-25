@@ -108,22 +108,21 @@ class CallStack {
         let cur;
         OUTER:
         while (this.frames.length !== 0) {
-            cur = this.frames.pop();
-
+            cur = this.frames[this.frames.length - 1];
             if (cur.shouldDelayExecution()) {
-                this.frames.push(cur);
                 cur.pushUnevaluatedArguments(this.frames);
                 continue;
             }
+            cur = this.frames.pop();
 
             let result = cur.evaluate();
             while (result === NULL) {
-                cur = this.frames.pop();
+                cur = this.frames[this.frames.length - 1];
                 if (cur.shouldDelayExecution()) {
-                    this.frames.push(cur);
                     cur.pushUnevaluatedArguments(this.frames);
                     continue OUTER;
                 }
+                cur = this.frames.pop();
                 result = cur.evaluate();
             }
             if (result instanceof StackFrame) {
