@@ -42,10 +42,6 @@ class StackFrame {
         return this;
     }
 
-    shouldDelayExecution() {
-        return Boolean(this.numberOfPendingArguments);
-    }
-
     pushUnevaluatedArguments(stack) {
         const L = this.args.length;
         for (let i = 0; i < L; i++) {
@@ -106,23 +102,24 @@ class CallStack {
 
     evaluate() {
         let cur;
+        let result;
         OUTER:
         while (this.frames.length !== 0) {
             cur = this.frames[this.frames.length - 1];
-            if (cur.shouldDelayExecution()) {
+            if (cur.numberOfPendingArguments > 0) {
                 cur.pushUnevaluatedArguments(this.frames);
                 continue;
             }
-            cur = this.frames.pop();
+            this.frames.pop();
 
-            let result = cur.evaluate();
+            result = cur.evaluate();
             while (result === NULL) {
                 cur = this.frames[this.frames.length - 1];
-                if (cur.shouldDelayExecution()) {
+                if (cur.numberOfPendingArguments > 0) {
                     cur.pushUnevaluatedArguments(this.frames);
                     continue OUTER;
                 }
-                cur = this.frames.pop();
+                this.frames.pop();
                 result = cur.evaluate();
             }
             if (result instanceof StackFrame) {
