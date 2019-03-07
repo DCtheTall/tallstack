@@ -120,8 +120,8 @@ it can get to native, but I am sure there is more that can be done and PRs are w
 
 ## License
 
-This software is issued under the MIT license. It is free for use as is without
-warranty for personal or recreational use. You can read more by looking at LICENSE.md.
+This software is issued under the Apache 2.0 license. It is free for use as is without
+warranty for personal or recreational use. You can read more by looking at LICENSE.
 
 ## Contributing
 
