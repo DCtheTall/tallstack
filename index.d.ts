@@ -1,5 +1,12 @@
-export function call<T>(func: (...args: any[]) => T, args: any[]): (...args: any[]) => T;
+export function call<S extends any[], T>(func: (...args: S) => T): T;
 
-export function callWithContext<T>(thisArg: any, func: (...args: any[]) => T, args: any[]): (...args: any[]) => T;
+export function callWithContext<S extends any[], T>(
+  thisArg: any,
+  func: (...args: S) => T,
+  ...args: S
+): T;
 
-export function recursive<T>(func: (...args: any[]) => T, thisArg: any): any;
+export function recursive<S extends any[], T>(
+  func: (...args: S) => T,
+  thisArg?: any,
+): (...args: S) => T;
