@@ -96,10 +96,6 @@ class CallStack {
         this.frames = [firstFrame];
     }
 
-    push(stackFrame) {
-        this.frames.push(stackFrame);
-    }
-
     evaluate() {
         let cur;
         let result;
