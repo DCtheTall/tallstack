@@ -133,7 +133,7 @@ class CallStack {
  * @template S,T
  * @param {(...args: S) => T} func
  * @param {any} thisArg
- * @param {(...args: S) => T} func
+ * @return {(...args: S) => T}
  */
 function recursive(func, thisArg) {
     const name = func.name || 'recurse';
