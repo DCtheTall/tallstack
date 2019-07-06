@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/DCtheTall/tallstack#readme",
   "devDependencies": {
-    "jest": "^24.1.0"
+    "jest": "^24.8.0"
   }
 }
