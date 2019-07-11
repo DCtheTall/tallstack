@@ -67,7 +67,7 @@ const obj = { multiply: (x, y) => (x * y) };
 
 function factorialWithThis(N) {
     if (N === 0) return 1;
-    return call(this.multiply, N, call(factorial, N - 1));
+    return call(this.multiply, N, callWithContext(this, factorialWithThis, N - 1));
 }
 
 const factorial = recursive(factorialWithThis, obj);
