@@ -48,7 +48,20 @@ test('Computing 10 factorial using callWithContext', () => {
         return this.mult(x, y);
     }
     const fact = recursive((n) =>
-        (n === 0 ? 1 : callWithContext(o, mult, n, call(fact, n - 1))));
+        (n === 0 ? 1 : callWithContext(o, mult, n, callWithContext(o, fact, n - 1))));
+    const got = fact(10);
+    expect(3628800).toBe(got);
+});
+
+test('Calling recurse() with a supplied context', () => {
+    const o = { mult: (x, y) => (x * y) };
+    function mult(x, y) {
+        return this.mult(x, y);
+    };
+    const fact = recursive(function (n) {
+        if (n === 0) return 1;
+        return callWithContext(this, mult, n, callWithContext(this, fact, n - 1));
+    }, o);
     const got = fact(10);
     expect(3628800).toBe(got);
 });

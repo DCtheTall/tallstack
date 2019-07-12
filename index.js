@@ -8,7 +8,7 @@ javascript that is then evaluated iteratively in applicative order.
 
 --------------------
 Author: Dylan Cutler
-License: MIT
+License: Apache-2.0
 Copyright: February, 2019
 
 */
