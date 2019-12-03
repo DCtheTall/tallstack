@@ -86,3 +86,20 @@ test('Recursing with functions that call one another', () => {
     got = isOdd(5e5 + 1);
     expect(true).toBe(got);
 });
+
+test('Returned function should have the same name as the argument', () => {
+    const add = (x, y) => (x + y);
+    const fib =
+        (n) => (n < 3 ? n - 1 : call(add, call(fib, n - 1), call(fib, n - 2)));
+    expect('fib').toBe(recursive(fib).name);
+});
+
+test(
+    'Returned function should have the default name if the argument is ' +
+    'nameless',
+    () => {
+        const add = (x, y) => (x + y);
+        const fib = recursive((n) =>
+            (n < 3 ? n - 1 : call(add, call(fib, n - 1), call(fib, n - 2))));
+        expect('recurse').toBe(fib.name);
+    });

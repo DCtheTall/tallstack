@@ -136,16 +136,17 @@ class CallStack {
  * @return {(...args: S) => T}
  */
 function recursive(func, thisArg) {
-    const name = func.name || 'recurse';
-    const recursiveFunc = {
-        [name]: (...args) => {
-            const firstEval = func.apply(thisArg, args);
-            if (!(firstEval instanceof StackFrame)) {
-                return firstEval;
-            }
-            return new CallStack(firstEval).evaluate();
-        },
-    }[name];
+    const recursiveFunc = (...args) => {
+        const firstEval = func.apply(thisArg, args);
+        if (!(firstEval instanceof StackFrame)) {
+            return firstEval;
+        }
+        return new CallStack(firstEval).evaluate();
+    };
+    Object.defineProperty(
+        recursiveFunc,
+        'name',
+        { value: func.name || 'recurse' });
     originalFunctionMap.set(recursiveFunc, func);
     return recursiveFunc;
 }
