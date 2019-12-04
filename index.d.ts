@@ -6,7 +6,12 @@ export function callWithContext<S extends any[], T>(
   ...args: S
 ): T;
 
+interface Options {
+  memoize: boolean;
+}
+
 export function recursive<S extends any[], T>(
   func: (...args: S) => T,
   thisArg?: any,
+  options?: Options,
 ): (...args: S) => T;

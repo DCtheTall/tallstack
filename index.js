@@ -16,8 +16,50 @@ Copyright: February, 2019
 "use strict";
 
 const NULL = Symbol('null');
+const RETURNED = Symbol('ret');
 
 const originalFunctionMap = new WeakMap();
+
+/**
+ * @param {Map} memory
+ * @param {any[]} args
+ * @return {any}
+ */
+function retrieveFromMemory(memory, args) {
+    let tmp = memory;
+    const L = args.length;
+    for (let i = 0; i < L; i++) {
+        const arg = args[i];
+        tmp = tmp.get(arg);
+        if (!tmp) {
+            return NULL;
+        }
+    }
+    return tmp.get(RETURNED);
+}
+
+/**
+ * @param {Map} memory
+ * @param {any[]} args
+ * @param {any} value
+ */
+function cacheResultInMemory(memory, args, value) {
+    let tmp = memory;
+    const L = args.length;
+    for (let i = 0; i < L; i++) {
+        const arg = args[i];
+        const next = memo.get(arg);
+        if (next) {
+            tmp = next;
+            continue;
+        }
+        const newMemory = new Map();
+        newMemory.set(RETURNED, NULL);
+        tmp.set(arg, newMemory);
+        tmp = newMemory;
+    }
+    tmp.set(RETURNED, value);
+}
 
 class StackFrame {
     constructor(func, args) {
@@ -93,12 +135,25 @@ function callWithContext(thisArg, func, ...args) {
     return new StackFrame(func, args).setContext(thisArg);
 }
 
+/**
+ * @template T
+ * @class CallStack
+ */
 class CallStack {
-    constructor(firstFrame) {
+    /**
+     * @constructor
+     * @param {StackFrame<T>} firstFrame
+     * @param {Map} memory
+     */
+    constructor(firstFrame, memory = null) {
         this.frames = [firstFrame];
+        this.memory = memory;
     }
 
-    evaluate() {
+    /**
+     * @return T
+     */
+    evaluateStack() {
         let cur;
         let result;
         OUTER:
@@ -109,7 +164,6 @@ class CallStack {
                 continue;
             }
             this.frames.pop();
-
             result = cur.evaluate();
             while (result === NULL) {
                 cur = this.frames[this.frames.length - 1];
@@ -132,16 +186,34 @@ class CallStack {
 /**
  * @template S,T
  * @param {(...args: S) => T} func
- * @param {any} thisArg
+ * @param {any=} thisArg
+ * @param {{
+ *   memoize: boolean,
+ * }=} options
  * @return {(...args: S) => T}
  */
-function recursive(func, thisArg) {
+function recursive(func, thisArg = null, opts = {}) {
+    let memory;
+    if (opts.memoize) {
+        memory = new Map();
+        memory.set(RETURNED, NULL);
+    }
     const recursiveFunc = (...args) => {
-        const firstEval = func.apply(thisArg, args);
+        let firstEval;
+        if (opts.memoize) {
+            firstEval = retrieveFromMemory(memory, args);
+            if (firstEval !== NULL) {
+                return firstEval;
+            }
+        }
+        firstEval = func.apply(thisArg, args);
         if (!(firstEval instanceof StackFrame)) {
+            if (opts.memoize) cacheResultInMemory(memory, args, firstEval);
             return firstEval;
         }
-        return new CallStack(firstEval).evaluate();
+        const params = [firstEval];
+        if (opts.memoize) params.push(memory);
+        return new CallStack(...params).evaluateStack();
     };
     Object.defineProperty(
         recursiveFunc,
