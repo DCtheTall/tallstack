@@ -76,9 +76,10 @@ const factorial = recursive(factorialWithThis, obj);
 ## How does it work?
 
 The library works by implementing a virtual callstack in JavaScript and then evaluating
-the stack iteratively. The iterative evaluation guarantees that the stack is
-not bound by the size of the call stack in the interpreter. This allows you to evaluate
-recursions that are thousands or possibly millions of calls deep.
+the stack iteratively. The iterative evaluation allows easy implementation of tail call
+recursion and guarantees that the stack is not bound by the size of the call stack
+in the interpreter. This allows you to evaluate recursions that are thousands or possibly
+millions of calls deep.
 
 ## What are the drawbacks?
 
@@ -117,6 +118,15 @@ To some extent this is to be expected, due to the added complexity on top of nor
 evaluation. Right now the performance seems to degrade as your recursion tree gets wider (i.e. each
 call has many recursive calls). I have done some work to speed it up but it is not quite as fast as
 it can get to native, but I am sure there is more that can be done and PRs are welcome.
+
+### 3. No free lunch:
+
+This library does not guarantee you can have infinite recursion trees. The stack in this library
+is bound by the memory of the heap of the JavaScript interpreter.
+
+This library does have its version of tail-call optimization since a stack frame is popped from the
+stack in order to be evaluated. But, since JavaScript is single-threaded any infinite recursion loop
+will entirely block execution, so please code carefully.
 
 ## License
 
