@@ -75,8 +75,8 @@ const factorial = recursive(factorialWithThis, obj);
 
 ## How does it work?
 
-The library works by implementing the callstack in JavaScript and then evaluating
-the recursion iteratively. The iterative evaluation guarantees that the stack is
+The library works by implementing a virtual callstack in JavaScript and then evaluating
+the stack iteratively. The iterative evaluation guarantees that the stack is
 not bound by the size of the call stack in the interpreter. This allows you to evaluate
 recursions that are thousands or possibly millions of calls deep.
 
