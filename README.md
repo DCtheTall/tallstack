@@ -46,9 +46,9 @@ calling. Extending the `N` factorial example above:
 ```javascript
 const { recursive, call, callWithContext } = require('tallstack');
 
-const object = { multiply: (x, y) => (x * y) };
+const object = { multiplyImpl: (x, y) => (x * y) };
 function multiply(x, y) {
-    return this.multiply(x, y);
+    return this.multiplyImpl(x, y);
 }
 
 const factorial = recursive((N) => {
