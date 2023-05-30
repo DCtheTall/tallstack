@@ -1,7 +1,5 @@
 # tallstack
 
-**This is not an officially supported Google product**
-
 A small library which allows you to define tail recursive functions
 in JavaScript that will not cause stack overflow.
 
